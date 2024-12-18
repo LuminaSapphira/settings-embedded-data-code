@@ -1,0 +1,10 @@
+{
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+    "runtime.version": "Lua 5.2",
+    "format.defaultConfig": {
+        "indent_style": "space",
+        "indent_size": "4"
+    },
+    "workspace.library": ["fmtk/factorio"],
+    "workspace.preloadFileSize": 1000
+}

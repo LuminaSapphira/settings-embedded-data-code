@@ -1,0 +1,17 @@
+{
+	"name": "settings-embedded-data-code",
+	"title": "Settings Embedded Data Code",
+	"author": "LuminaSapphira",
+	"description": "Allows executing arbitrary code stored in mod startup settings during prototype stage",
+	"factorio_version": "2.0",
+	"package": {
+		"ignore": [
+			"*.rs",
+			"*.toml",
+			"fmtk/**/*",
+			"build/**/*",
+			"justfile",
+			"info-base.json"
+		]
+	}
+}
