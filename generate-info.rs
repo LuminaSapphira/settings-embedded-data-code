@@ -27,29 +27,48 @@ use serde_json::Value as JsonValue;
 
 use jiff::Timestamp;
 
+#[allow(unused)]
 #[derive(Deserialize)]
 struct ModPortalPage {
     pagination: ModPortalPagination,
     results: Vec<ModPortalResultItem>,
 }
 
+#[allow(unused)]
 #[derive(Deserialize)]
 struct ModPortalPagination {
     page_count: usize,
     page: usize,
 }
 
+#[allow(unused)]
 #[derive(Deserialize)]
 struct ModPortalResultItem {
     name: String,
+    latest_release: Option<ModPortalResultRelease>,
+    downloads_count: u64,
 }
 
+#[allow(unused)]
+#[derive(Deserialize)]
+struct ModPortalResultRelease {
+    info_json: ModPortalResultInfoJson,
+}
+
+#[allow(unused)]
+#[derive(Deserialize)]
+struct ModPortalResultInfoJson {
+    factorio_version: String,
+}
+
+#[allow(unused)]
 #[derive(Deserialize)]
 struct Properties {
     ignore: HashSet<String>,
     version: u16,
 }
 
+#[allow(unused)]
 #[derive(Serialize)]
 struct ModPortalInfoFinal {
     #[serde(flatten)]
@@ -86,7 +105,12 @@ fn scrape_mod_portal() -> anyhow::Result<Vec<String>> {
         );
 
         max_pages.get_or_init(|| page.pagination.page_count);
-        for item in page.results {
+        for item in page.results.into_iter().filter(|f| {
+            f.latest_release
+                .as_ref()
+                .map(|r| r.info_json.factorio_version == "2.0")
+                .unwrap_or(false)
+        }) {
             mod_names.push(item.name);
         }
         if current_page == *max_pages.get().unwrap() {

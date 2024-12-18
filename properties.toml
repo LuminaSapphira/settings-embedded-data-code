@@ -1,4 +1,6 @@
 version = 1
 ignore = [
-  "settings-embedded-data-code"
+  "settings-embedded-data-code",
+  "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+  "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
 ]
