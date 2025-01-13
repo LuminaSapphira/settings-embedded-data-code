@@ -3,3 +3,4 @@
 /build
 cached-mods.toml
 info.json
+.envrc
